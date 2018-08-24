@@ -24,13 +24,14 @@
 <script src="app.js"></script>
 
 <!-- My controllers -->
-<!--  	<script src="scripts/controllers/homeController.js"></script> -->
+ 	<script src="homeController.js"></script>
 
 </head>
 
-<body>
-
+<body ng-controller="homeController">
+	
 	<h1 class="alert alert-primary">Hello world!</h1>
+	<h2 class="alert alert-danger">{{value}}</h2>
 </body>
 
 </html>

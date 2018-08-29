@@ -1,8 +1,29 @@
 package com.example.tenis.quilmes.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Player {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	
 	Integer position;
+	String name;
+	Integer won;
+	Integer lost;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getPosition() {
 		return position;
@@ -12,9 +33,42 @@ public class Player {
 		this.position = position;
 	}
 
-	public Player(Integer position) {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getWon() {
+		return won;
+	}
+
+	public void setWon(Integer won) {
+		this.won = won;
+	}
+
+	public Integer getLost() {
+		return lost;
+	}
+
+	public void setLost(Integer lost) {
+		this.lost = lost;
+	}
+
+	public Player(Integer position, String name, Integer won, Integer lost) {
 		super();
 		this.position = position;
+		this.name = name;
+		this.won = won;
+		this.lost = lost;
 	}
+
+	public Player() {
+		super();
+	}
+	
+	
 
 }

@@ -1,0 +1,31 @@
+.player{
+	padding: 5px;
+	margin-botton: 4px;
+}
+
+.playerName {
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
+}
+
+.addPlayerRow {
+	margin-left: 25%;
+	margin-top: 10px;
+}
+
+#nameInput {
+	margin-left: 40%;
+	margin-top: 5%;
+}
+
+#saveNewPlayerButton {
+	margin-left: 70%;
+}
+
+#saveResult {
+	margin-left: 40%;
+}
+
+.addNewPlayerButton {
+	margin-left: 30%;
+}

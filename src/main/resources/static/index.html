@@ -7,16 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link href="app.css" rel="stylesheet">
+
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 
-<!-- 3rd party stuff -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -24,14 +34,90 @@
 <script src="app.js"></script>
 
 <!-- My controllers -->
- 	<script src="homeController.js"></script>
+<script src="homeController.js"></script>
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
 
 </head>
 
 <body ng-controller="homeController">
-	
-	<h1 class="alert alert-primary">Hello world!</h1>
-	<h2 class="alert alert-danger">{{value}}</h2>
+
+	<ul class="nav nav-tabs" id="tabs" role="tablist">
+		<li class="nav-item"><a class="nav-link active" id="rankingTab"
+			data-toggle="tab" href="#rank" role="tab" aria-controls="rank"
+			aria-selected="true">Ranking</a></li>
+		<li class="nav-item"><a class="nav-link" id="matchesTab"
+			data-toggle="tab" href="#matches" role="tab" aria-controls="matches"
+			aria-selected="true">Historial</a></li>
+	</ul>
+
+	<div class="tab-content" id="tab-contents">
+		<div class="tab-pane fade show active" id="rank" role="tabpanel"
+			aria-labelledby="rankingTab">
+			<div class="container">
+				<div class="row player border border-success" ng-repeat="player in players | orderBy : 'position'">
+					<div class="col-2">{{player.position}}</div>
+					<div class="col-6 playerName">{{player.name}}</div>
+					<div class="col-4">{{player.won}}G {{player.lost}}P</div>
+				</div>
+				<div class="row addPlayerRow">
+					<button class="btn btn-success addNewPlayerButton">
+						<i class="fa fa-plus" aria-hidden="true" ng-click="showNewPlayerForm = true">  Agregar jugador</i>
+					</button>
+				</div>
+				<div class="row addPlayerForm" ng-show="showNewPlayerForm">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="nameInput" ng-model="newPlayerName" placeholder="Nombre y apellido">
+						</div>
+						<button type="submit" class="btn btn-primary" id="saveNewPlayerButton" ng-click="saveNewPlayer()">Guardar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="matches" role="tabpanel"
+			aria-labelledby="matchesTab">
+
+			<div class="container">
+				
+				<form>
+					<div class="container">
+						<h2 class="text-center">Ingresar resultado:</h2>
+						<div class="row">
+							<div class="col-6">
+								<label for="winner">Ganador:</label>
+								<select ng-model="winner" ng-options="x for x in playerNames"></select>
+							</div>
+							<div clas="col-6">
+								<label for="loser">Perdedor:</label>
+								<select ng-model="loser" ng-options="x for x in playerNames"></select>
+							</div>
+							<div class="offset-2 form-group row">
+								<label for="loser" class="col-4">Resultado:</label>
+								<input type="text" ng-model="result" class="col-4 form-control" id="result">
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary" id="saveResult" ng-click="saveResult()">Guardar</button>
+				</form>
+			
+				<h2 class="text-center">Resultados:</h2>
+				<div class="row" ng-repeat="match in matches">
+					<div class="col-4">
+						<b>{{match.winner}}</b>
+					</div>
+					<div class="col-2">{{match.result}}</div>
+					<div class="col-4">{{match.loser}}</div>
+					<div class="row">{{match.date}}</div>
+					<br/>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

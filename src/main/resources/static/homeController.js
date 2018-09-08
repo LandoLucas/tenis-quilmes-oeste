@@ -1,6 +1,6 @@
 tennisApp.controller('homeController', ['$scope', '$http', function (scope, $http) {
 	
-	const baseUrl = "http://localhost:8080/api";
+	const baseUrl = "http://52.11.222.208:8081/api";
 	
 	scope.saveNewPlayer = function(){
 		$http.put(baseUrl + "/ranking", scope.newPlayerName)

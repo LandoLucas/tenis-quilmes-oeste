@@ -52,28 +52,57 @@
 		<li class="nav-item"><a class="nav-link" id="matchesTab"
 			data-toggle="tab" href="#matches" role="tab" aria-controls="matches"
 			aria-selected="true">Historial</a></li>
+		<li class="nav-item"><a class="nav-link" id="rulesTab"
+			data-toggle="tab" href="#rules" role="tab" aria-controls="rules"
+			aria-selected="true">Reglas</a></li>
+			
 	</ul>
 
 	<div class="tab-content" id="tab-contents">
 		<div class="tab-pane fade show active" id="rank" role="tabpanel"
 			aria-labelledby="rankingTab">
 			<div class="container">
-				<div class="row player border border-success" ng-repeat="player in players | orderBy : 'position'">
-					<div class="col-2">{{player.position}}</div>
-					<div class="col-6 playerName">{{player.name}}</div>
-					<div class="col-4">{{player.won}}G {{player.lost}}P</div>
-				</div>
+			    <table class="table table-sm">
+					<thead class="">
+						<tr>
+							<th scope="col">Ranking</th>
+							<th scope="col">Jugador</th>
+							<th scope="col">Record</th>
+							<th scope="col">Puntos</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="player in players | orderBy : 'position'">
+						<tr>
+							<th scope="row"><b>{{player.position}}</b></th>
+							<td><b>{{player.name}}</b></td>
+							<td><b>{{player.won}}G {{player.lost}}P</b></td>
+							<td><b>-</b></td>
+						</tr>
+					</tbody>
+				</table>
+			
+			
+<!-- 				<div class="row player border border-success" -->
+<!-- 					ng-repeat="player in players | orderBy : 'position'"> -->
+<!-- 					<div class="col-2">{{player.position}}</div> -->
+<!-- 					<div class="col-5 playerName">{{player.name}}</div> -->
+<!-- 					<div class="col-3">{{player.won}}G {{player.lost}}P</div> -->
+<!-- 					<div class="col-2">1000</div> -->
+<!-- 				</div> -->
 				<div class="row addPlayerRow">
 					<button class="btn btn-success addNewPlayerButton">
-						<i class="fa fa-plus" aria-hidden="true" ng-click="showNewPlayerForm = true">  Agregar jugador</i>
+						<i class="fa fa-plus" aria-hidden="true"
+							ng-click="showNewPlayerForm = true"> Agregar jugador</i>
 					</button>
 				</div>
 				<div class="row addPlayerForm" ng-show="showNewPlayerForm">
 					<form>
 						<div class="form-group">
-							<input type="text" class="form-control" id="nameInput" ng-model="newPlayerName" placeholder="Nombre y apellido">
+							<input type="text" class="form-control" id="nameInput"
+								ng-model="newPlayerName" placeholder="Nombre y apellido">
 						</div>
-						<button type="submit" class="btn btn-primary" id="saveNewPlayerButton" ng-click="saveNewPlayer()">Guardar</button>
+						<button type="submit" class="btn btn-primary"
+							id="saveNewPlayerButton" ng-click="saveNewPlayer()">Guardar</button>
 					</form>
 				</div>
 			</div>
@@ -82,39 +111,64 @@
 			aria-labelledby="matchesTab">
 
 			<div class="container">
-				
+
 				<form>
 					<div class="container">
 						<h2 class="text-center">Ingresar resultado:</h2>
-						<div class="row">
-							<div class="col-6">
-								<label for="winner">Ganador:</label>
-								<select ng-model="winner" ng-options="x for x in playerNames"></select>
-							</div>
-							<div clas="col-6">
-								<label for="loser">Perdedor:</label>
-								<select ng-model="loser" ng-options="x for x in playerNames"></select>
-							</div>
-							<div class="offset-2 form-group row">
-								<label for="loser" class="col-4">Resultado:</label>
-								<input type="text" ng-model="result" class="col-4 form-control" id="result">
-							</div>
+						<div class="form-group row" style="margin-left: 0px;">
+							<label for="winner">Ganador:</label> <select ng-model="winner"
+								ng-options="x for x in playerNames"></select>
+						</div>
+						<div class="form-group row" style="margin-left: 0px;">
+							<label for="loser">Perdedor:</label> <select ng-model="loser"
+								ng-options="x for x in playerNames"></select>
+						</div>
+						<div class="form-group row">
+							<label for="loser" class="col-4">Resultado:</label> <input
+								type="text" ng-model="result" class="col-4 form-control"
+								id="result">
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary" id="saveResult" ng-click="saveResult()">Guardar</button>
+					<button type="submit" class="btn btn-primary" id="saveResult"
+						ng-click="saveResult()">Guardar</button>
 				</form>
-			
+
 				<h2 class="text-center">Resultados:</h2>
-				<div class="row" ng-repeat="match in matches">
-					<div class="col-4">
-						<b>{{match.winner}}</b>
-					</div>
-					<div class="col-2">{{match.result}}</div>
-					<div class="col-4">{{match.loser}}</div>
-					<div class="row">{{match.date}}</div>
-					<br/>
-				</div>
+				<table class="table table-sm">
+					<thead class="">
+						<tr>
+							<th scope="col">Ganador</th>
+							<th scope="col">Resultado</th>
+							<th scope="col">Perdedor</th>
+							<th scope="col">Fecha</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="match in matches">
+						<tr>
+							<th scope="row"><b>{{match.winner}}</b></th>
+							<td><b>{{match.result}}</b></td>
+							<td><b>{{match.loser}}</b></td>
+							<td><b>{{match.date}}</b></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="rules" role="tabpanel"
+			aria-labelledby="rulesTab">
+			<h2 class="text-center">Reglas</h2>
+			<div>
+				Cada jugador puede retar solamente a quien este situado uno o dos lugares encima de él.
+				En caso de vencer, el jugador retador y el desafiado intercambian posiciones.
 				
+				<div>Cada jugador tiene derecho a realizar un desafio por mes.</div>
+				<div>Los partidos se jugaran a un set a 5, con bola de oro.	</div>
+				
+				
+				<div> Al finalizar el torneo, se repartiran puntos de la siguiente manera: </div>
+				<div><i class="fa fa-trophy"></i>1° lugar: 1000 puntos</div>
+				<div>2° al 4° lugar: 500 puntos</div>
+				<div>5° al 10° lugar: 200 puntos</div>
 			</div>
 		</div>
 	</div>

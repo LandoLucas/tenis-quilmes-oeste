@@ -29,3 +29,9 @@
 .addNewPlayerButton {
 	margin-left: 30%;
 }
+
+
+table { 
+	font-size: 14px;
+	overflow-y: scroll;
+}

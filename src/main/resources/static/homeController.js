@@ -24,7 +24,7 @@ tennisApp.controller('homeController', ['$scope', '$http', function (scope, $htt
 	scope.getMatches = function() {
 		$http.get(baseUrl + "/matches")
 		.then(function(response) {
-			scope.matches = response.data;
+			scope.matches = response.data.reverse();
 		});
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tenis.quilmes.model.EloRating;
 import com.example.tenis.quilmes.model.Match;
 import com.example.tenis.quilmes.model.Player;
 import com.example.tenis.quilmes.repository.MatchRepository;
@@ -57,13 +58,19 @@ public class MatchesController {
 			}
 		}
 		
-		if(winner.getPosition() > loser.getPosition()) {
-			Integer temp = loser.getPosition();
-			loser.setPosition(winner.getPosition());
-			winner.setPosition(temp);
-		}
+//		if(winner.getPosition() > loser.getPosition()) {
+//			Integer temp = loser.getPosition();
+//			loser.setPosition(winner.getPosition());
+//			winner.setPosition(temp);
+//		}
 		winner.setWon(winner.getWon() + 1);
 		loser.setLost(loser.getLost() + 1);
+		int winnerElo = EloRating.calculate2PlayersRating(winner.getPoints(), loser.getPoints(), "+");
+		int loserElo = EloRating.calculate2PlayersRating(loser.getPoints(), winner.getPoints(), "-");
+
+		winner.setPoints(winnerElo);
+		loser.setPoints(loserElo);
+		
 		playerRepository.save(winner);
 		playerRepository.save(loser);
 	}

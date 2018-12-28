@@ -65,18 +65,16 @@
 			    <table class="table table-sm">
 					<thead class="">
 						<tr>
-							<th scope="col">Ranking</th>
+							<th scope="col">Puntos</th>
 							<th scope="col">Jugador</th>
 							<th scope="col">Record</th>
-							<th scope="col">Puntos</th>
 						</tr>
 					</thead>
-					<tbody ng-repeat="player in players | orderBy : 'position'">
+					<tbody ng-repeat="player in players | orderBy : '-points'">
 						<tr>
-							<th scope="row"><b>{{player.position}}</b></th>
+							<th scope="row"><b>{{player.points}}</b></th>
 							<td><b>{{player.name}}</b></td>
 							<td><b>{{player.won}}G {{player.lost}}P</b></td>
-							<td><b>-</b></td>
 						</tr>
 					</tbody>
 				</table>

@@ -16,7 +16,8 @@ public class Player {
 	String name;
 	Integer won;
 	Integer lost;
-
+	Integer points;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -63,11 +64,20 @@ public class Player {
 		this.name = name;
 		this.won = won;
 		this.lost = lost;
+		this.points = 1200;
 	}
 
 	public Player() {
 		super();
 	}
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
 	
 	
 

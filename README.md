@@ -1,4 +1,3 @@
 # tenis-quilmes-oeste
-lgklfg
 
 
